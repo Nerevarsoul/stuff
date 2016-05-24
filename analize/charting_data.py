@@ -11,10 +11,11 @@ for i in range(1):  # len(df.columns)):
     price = pd.DataFrame(df.ix[1,i])
     price['DT'] = pd.to_datetime(price['DT'])
 
-    fig = plt.figure()
-    ax1 = plt.subplot2grid((1,1), (0,0))
-    ax1.plot_date(price["DT"], price["C"])
-    for label in ax1.xaxis.get_ticklabels():
+    # fig = plt.figure()
+    # ax1 = plt.subplot2grid((1,1), (0,0))
+    fig, ax = plt.subplots()
+    ax.plot_date(price["DT"], price["C"])
+    for label in ax.xaxis.get_ticklabels():
         label.set_rotation(45)
 
     # x_min = min(price["DT"])
