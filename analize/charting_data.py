@@ -15,6 +15,8 @@ for i in range(1):  # len(df.columns)):
     fig.set_size_inches((15,8))
     ax1 = plt.subplot2grid((1, 1), (0, 0))
     ax1.plot_date(price['DT'], price['O'],'-')
+    for label in ax1.xaxis.get_ticklabels():
+        label.set_rotation(45)
     plt.xlabel('Date')
     plt.ylabel('Price')
     name = "{}-{}.png".format(price['DT'][0].year, price['DT'][0].month)
