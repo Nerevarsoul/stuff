@@ -15,8 +15,8 @@ for i in range(1):  # len(df.columns)):
     # ax1 = plt.subplot2grid((1,1), (0,0))
     fig, ax = plt.subplots()
     ax.plot_date(price["DT"], price["C"])
-    for label in ax.xaxis.get_ticklabels():
-        label.set_rotation(45)
+    # for label in ax.xaxis.get_ticklabels():
+        # label.set_rotation(45)
 
     # x_min = min(price["DT"])
     # x_max = max(price["DT"])
