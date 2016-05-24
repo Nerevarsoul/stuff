@@ -14,7 +14,8 @@ for i in range(1):  # len(df.columns)):
     # fig = plt.figure()
     # ax1 = plt.subplot2grid((1,1), (0,0))
     fig, ax = plt.subplots()
-    ax.plot_date(price["DT"], price["C"])
+    ax.plot_date(price["DT"], price["C"],'-')
+    ax.grid(True)
     # for label in ax.xaxis.get_ticklabels():
         # label.set_rotation(45)
 
