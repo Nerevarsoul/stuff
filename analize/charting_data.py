@@ -12,6 +12,7 @@ for i in range(1):  # len(df.columns)):
     price['DT'] = pd.to_datetime(price['DT'])
     
     fig = plt.figure()
+    fig.set_size_inches((15,8))
     ax1 = plt.subplot2grid((1, 1), (0, 0))
     ax1.plot_date(price['DT'], price['O'],'-')
     plt.xlabel('Date')
