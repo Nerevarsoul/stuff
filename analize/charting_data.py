@@ -13,7 +13,7 @@ for i in range(1):  # len(df.columns)):
 
     fig, ax1 = plt.subplots()
     #fig.set_size_inches((15, 8))
-    ax1.plot_date(price["DT"], price["C"], '-', label='C')
+    ax1.plot_date(price["DT"], price["C"], '-')
 
     #ax2 = ax1.twinx()
     #ax2.plot_date(price["DT"], price["L"], '-', label='L')
