@@ -13,11 +13,16 @@ for i in range(1):  # len(df.columns)):
     price['num_date'] = price['DT'].apply(date2num)
     
     dayFormatter = DateFormatter('%d')
+    mondays = WeekdayLocator(MONDAY)
+    alldays = DayLocator() 
     quotes = price[['num_date','O','L','H','C']].dropna()
 
     fig, ax = plt.subplots()
     fig.set_size_inches((15,8))
     ax.xaxis.set_major_formatter(dayFormatter)
+    ax.xaxis.set_major_locator(mondays)
+    ax.xaxis.set_minor_locator(alldays)
+    # ax.xaxis.set_major_formatter(weekFormatter)
     candlestick_ohlc(ax, quotes.values, width=0.05,colorup='g',colordown='r')
     ax.xaxis_date()
     ax.autoscale_view()
