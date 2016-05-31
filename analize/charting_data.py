@@ -7,7 +7,7 @@ import pandas as pd
 from pylab import date2num
 from matplotlib.dates import MinuteLocator, HourLocator, num2date,\
     DayLocator, MONDAY, DateFormatter, WeekdayLocator
-from matplotlib.finance import candlestick_ohlc
+from matplotlib.finance import candlestick2_ohlc
 
 
 df = pd.read_json('for_monthly_charts.json',)
@@ -15,19 +15,15 @@ for i in range(1):  # len(df.columns)):
     price = pd.DataFrame(df.ix[1,i])
     price['DT'] = pd.to_datetime(price['DT'])
     price['num_date'] = price['DT'].apply(date2num)
+
+    quotes = price[['num_date','O','L','H','C']].dropna()
     
     ndays = np.unique(np.trunc(price['num_date']), return_index=True)
-    print ndays[0]
     xdays =  []
     for n in np.arange(len(ndays[0])):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
-    print xdays
 
-    # dayFormatter = DateFormatter('%d')
-    # mondays = WeekdayLocator(MONDAY)
-    # alldays = DayLocator()
-
-    quotes = price[['num_date','O','L','H','C']].dropna()
+    data2 = [quotes[1:]]
 
     fig = plt.figure(figsize=(10, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
@@ -39,7 +35,7 @@ for i in range(1):  # len(df.columns)):
     ax.spines['bottom'].set_linewidth(2)
     ax.set_xticks(ndays[0])
     ax.set_xticklabels(xdays, rotation=45, horizontalalignment='right')
-    candlestick_ohlc(ax, quotes.values, width=0.05, colorup='g', colordown='r')
+    candlestick2_ohlc(ax, quotes['O'], quotes['H'], quotes['L'], quotes['C'], width=0.05, colorup='g', colordown='r')
     name = "{}-{}.png".format(price['DT'][0].year, price['DT'][0].month)
     plt.savefig(name) 
     
