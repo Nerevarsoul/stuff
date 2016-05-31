@@ -16,7 +16,7 @@ for i in range(1):  # len(df.columns)):
     price['DT'] = pd.to_datetime(price['DT'])
     price['num_date'] = price['DT'].apply(date2num)
 
-    quotes = price[['num_date','O','L','H','C']].dropna()
+    quotes = price[['num_date','O','H','L','C']].dropna()
     
     ndays = np.unique(np.trunc(price['num_date']), return_index=True)
     xdays =  []
