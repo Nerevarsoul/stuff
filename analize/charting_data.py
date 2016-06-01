@@ -16,6 +16,8 @@ for i in range(1):  # len(df.columns)):
     price['DT'] = pd.to_datetime(price['DT'])
     price['num_date'] = price['DT'].apply(date2num)
     price['my_date'] = np.trunc(price['num_date'])
+    price['new_date'] = [price['num_date'][0] + i * .020833 for i in np.arange(len(price['num_date']))]
+    # print price    
 
     ndays = np.unique(np.trunc(price['num_date']), return_index=True)
     xdays =  []
@@ -33,12 +35,8 @@ for i in range(1):  # len(df.columns)):
     ax.set_xticks(ndays[0])
     ax.set_xticklabels(xdays, rotation=45, horizontalalignment='right')
 
-    for day in ndays[0]:
-        q = price.loc[price['my_date'] == day]
-        quotes = q[['num_date', 'O', 'H', 'L', 'C']].dropna()
-        fig.subplots_adjust(bottom=0.1)
-        ax = fig.add_subplot(211)
-        candlestick_ohlc(ax, quotes.values, width=0.05, colorup='g', colordown='r')
+    quotes = price[['new_date', 'O', 'L', 'H' , 'C']].dropna()
+    candlestick_ohlc(ax, quotes.values, width=0.05, colorup='g', colordown='r')
 
     name = "{}-{}.png".format(price['DT'][0].year, price['DT'][0].month)
     plt.savefig(name) 
