@@ -17,17 +17,17 @@ for i in range(1):  # len(df.columns)):
     price['DT'] = pd.to_datetime(price['DT'])
     price['num_date'] = price['DT'].apply(date2num)
     price['my_date'] = np.trunc(price['num_date'])
-    new_date = [price['num_date'][0]]
+    # new_date = [price['num_date'][0]]
 
-    for i in np.arange(1, len(price['num_date'])):
-        diff = price['num_date'][i] - new_date[-1]
-        if diff < 1:
-           new_date.append(price['num_date'][i])
-        else:
-           new_date.append(price['num_date'][i]-math.floor(diff)) 
+    # for i in np.arange(1, len(price['num_date'])):
+        # diff = price['num_date'][i] - new_date[-1]
+        # if diff < 1:
+           # new_date.append(price['num_date'][i])
+        # else:
+           # new_date.append(price['num_date'][i]-math.floor(diff)) 
              
-    # price['new_date'] = [price['num_date'][0] + i * .020833 for i in np.arange(len(price['num_date']))]
-    price['new_date'] = new_date
+    price['new_date'] = [price['num_date'][0] + i * .020833 for i in np.arange(len(price['num_date']))]
+    # price['new_date'] = new_date
     # pd.set_option('display.max_rows', len(price))
     # print price    
 
@@ -37,6 +37,7 @@ for i in range(1):  # len(df.columns)):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
     newdays = np.unique(np.trunc(price['new_date']), return_index=True)
+    newdays = np.arange(len(ndays[0]))
 
     fig = plt.figure(figsize=(20, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
@@ -46,7 +47,7 @@ for i in range(1):  # len(df.columns)):
                    labelsize=12, pad=8)
     ax.spines['left'].set_linewidth(2)
     ax.spines['bottom'].set_linewidth(2)
-    ax.set_xticks(newdays[0])
+    ax.set_xticks(newdays)
     ax.set_xticklabels(xdays, rotation=45, horizontalalignment='right')
 
     quotes = price[['new_date', 'O', 'L', 'H' , 'C']].dropna()
