@@ -36,9 +36,8 @@ for i in range(1):  # len(df.columns)):
     for n in np.arange(len(ndays[0])):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
-    newdays = np.unique(np.trunc(price['new_date']), return_index=True)
-    newdays = np.arange(len(ndays[0]))
-
+    newdays = [price['num_date'][0] + i * 0.625 for i in np.arange(len(ndays[0]))]
+    
     fig = plt.figure(figsize=(20, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
     ax.xaxis.set_ticks_position('bottom')
