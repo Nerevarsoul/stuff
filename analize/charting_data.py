@@ -24,7 +24,9 @@ for i in range(1):  # len(df.columns)):
     for n in np.arange(len(ndays[0])):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
-    fig = plt.figure(figsize=(10, 5))
+    newdays = np.unique(np.trunc(price['new_date']), return_index=True)
+
+    fig = plt.figure(figsize=(20, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
@@ -32,7 +34,7 @@ for i in range(1):  # len(df.columns)):
                    labelsize=12, pad=8)
     ax.spines['left'].set_linewidth(2)
     ax.spines['bottom'].set_linewidth(2)
-    ax.set_xticks(ndays[0])
+    ax.set_xticks(newdays[0])
     ax.set_xticklabels(xdays, rotation=45, horizontalalignment='right')
 
     quotes = price[['new_date', 'O', 'L', 'H' , 'C']].dropna()
