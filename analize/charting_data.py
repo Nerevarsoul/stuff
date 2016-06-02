@@ -32,11 +32,13 @@ for i in range(1):  # len(df.columns)):
     # print price    
 
     ndays = np.unique(np.trunc(price['num_date']), return_index=True)
+    day_count = len(ndays[0])
     xdays =  []
-    for n in np.arange(len(ndays[0])):
+    for n in np.arange(day_count):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
-    newdays = [price['num_date'][0] + i * 0.625 for i in np.arange(len(ndays[0]))]
+    diff = (price['num_date'][len(price['new_date'])-1]-price['new_date'][0]) / (day_count+1)
+    newdays = [price['num_date'][0] + i * diff for i in np.arange(day_count)]
     
     fig = plt.figure(figsize=(20, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
