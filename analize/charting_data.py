@@ -38,7 +38,9 @@ for i in range(1):  # len(df.columns)):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
     diff = (price['num_date'][len(price['new_date'])-1]-price['new_date'][0]) / (day_count+1)
-    newdays = [price['num_date'][0] + i * diff for i in np.arange(day_count)]
+    print day_count
+    print diff
+    newdays = [price['num_date'][0] + i * diff/2 for i in np.arange(day_count)]
     
     fig = plt.figure(figsize=(20, 5))
     ax = fig.add_axes([0.1, 0.2, 0.85, 0.7])
