@@ -1,4 +1,5 @@
 import datetime
+import math
 
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -16,7 +17,18 @@ for i in range(1):  # len(df.columns)):
     price['DT'] = pd.to_datetime(price['DT'])
     price['num_date'] = price['DT'].apply(date2num)
     price['my_date'] = np.trunc(price['num_date'])
-    price['new_date'] = [price['num_date'][0] + i * .020833 for i in np.arange(len(price['num_date']))]
+    new_date = [price['num_date'][0]]
+
+    for i in np.arange(1, len(price['num_date'])):
+        diff = price['num_date'][i] - new_date[-1]
+        if diff < 1:
+           new_date.append(price['num_date'][i])
+        else:
+           new_date.append(price['num_date'][i]-math.floor(diff)) 
+             
+    # price['new_date'] = [price['num_date'][0] + i * .020833 for i in np.arange(len(price['num_date']))]
+    price['new_date'] = new_date
+    # pd.set_option('display.max_rows', len(price))
     # print price    
 
     ndays = np.unique(np.trunc(price['num_date']), return_index=True)
