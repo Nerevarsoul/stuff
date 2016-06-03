@@ -38,6 +38,7 @@ for i in range(1):  # len(df.columns)):
         xdays.append(datetime.date.isoformat(num2date(ndays[0][n])))
 
     diff = (price['new_date'][len(price['new_date'])-1]-price['new_date'][0]) / (day_count+1)
+    diff = 0.625
     print day_count
     print diff
     newdays = [price['new_date'][0] + i * diff for i in np.arange(day_count)]
