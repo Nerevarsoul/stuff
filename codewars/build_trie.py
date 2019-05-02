@@ -38,4 +38,3 @@ def build_trie(*args):
     for word in args:
         add_string(word, 1, result)
     return result
-    
