@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 
 
 def print_word(result: Counter):
-    for word, frequency in result.most_common():
+    for word, frequency in sorted(result.items(), key=lambda res: (-res[1], res[0])):
         print('<{}>: <{}>'.format(word, frequency))
 
 
